@@ -1,0 +1,89 @@
+<!--
+File name: contact.ejs
+Student’s Name: Ibrahim Goddi
+StudentID: 301122092
+Date: Oct 7, 2020
+ -->
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8" />
+    <!-- The viewport meta tag is responsible for adapting the size of the GUI to the size of the device screen-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="COMP 229 Web Application- Assignment 1- Ibrahim Goddi- 301122092" />
+    <meta name="author" content="Ibrahim Goddi" />
+    <title><%= title %></title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico"/>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/javascripts/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/stylesheets/theme.css" rel="stylesheet" />
+</head>
+<body id="page-top">
+    <section class="signup-section" id="signup">
+        <div class="container">
+            <!-- Material form contact -->
+            <div class="card">
+
+                <h5 class="card-header info-color white-text text-center py-4">
+                    <strong>Contact us</strong>
+                </h5>
+
+                <!--Card content-->
+                <div class="card-body px-lg-5 pt-0">
+
+                    <!-- Form -->
+                    <form class="text-center" style="color: #757575;" action="#!">
+
+                        <!-- Name -->
+                        <div class="md-form mt-3">
+                            <input type="text" id="materialContactFormName" class="form-control">
+                            <label for="materialContactFormName">Name</label>
+                        </div>
+
+                        <!-- E-mail -->
+                        <div class="md-form">
+                            <input type="email" id="materialContactFormEmail" class="form-control">
+                            <label for="materialContactFormEmail">E-mail</label>
+                        </div>
+
+                        <!-- Subject -->
+                        <span>Subject</span>
+                        <select class="mdb-select">
+                            <option value="" disabled>Choose option</option>
+                            <option value="1" selected>Feedback</option>
+                            <option value="2">Report a bug</option>
+                            <option value="3">Feature request</option>
+                            <option value="4">Feature request</option>
+                        </select>
+
+                        <!--Message-->
+                        <div class="md-form">
+                            <textarea id="materialContactFormMessage" class="form-control md-textarea" rows="3"></textarea>
+                            <label for="materialContactFormMessage">Message</label>
+                        </div>
+
+                        <!-- Copy -->
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="materialContactFormCopy">
+                            <label class="form-check-label" for="materialContactFormCopy">Send me a copy of this message</label>
+                        </div>
+
+                        <!-- Send button -->
+                        <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Send</button>
+
+                    </form>
+                    <!-- Form -->
+
+                </div>
+
+            </div>
+            <!-- Material form contact -->
+        </div>
+    </section>
+    <%- include('partials/footer') %>
+</body>
+</html>
