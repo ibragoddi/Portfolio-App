@@ -1,12 +1,187 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
   <head>
+    <meta charset="utf-8" />
+    <!-- The viewport meta tag is responsible for adapting the size of the GUI to the size of the device screen-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="COMP 229 Web Application- Assignment 1- Ibrahim Goddi- 301122092" />
+    <meta name="author" content="Ibrahim Goddi" />
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'  />
-    <link rel="icon" href="/images/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico"/>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/javascripts/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/stylesheets/theme.css" rel="stylesheet" />
   </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  <body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Home</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#aboutme">About Me</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contactme">Contact Me</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead">
+      <div class="container d-flex h-100 align-items-center">
+        <div class="mx-auto text-center">
+          <h1 class="mx-auto my-0 text-uppercase" style="font-size:x-large"><%= title %></h1>
+          <h2 class="text-white-50 mx-auto mt-2 mb-5">Welcome to <%= title %></h2>
+          <h2 class="text-white-50 mx-auto mt-2 mb-5">To give guests the most compelling experience.</h2>
+          <a class="btn btn-primary js-scroll-trigger" href="#about">Get Started</a>
+        </div>
+      </div>
+    </header>
+    <!-- About-->
+    <section class="about-section text-center" id="aboutme">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-white mb-4">Ibrahim Goddi</h2>
+            <p class="text-white-50">
+              My name is Ibrahim Goddi. I am 24 years old and I am enrolled in the Software Engineering program. Please
+              find my resume in the following link: https://we.tl/t-1LA0jinnkx
+            </p>
+          </div>
+        </div>
+        <img class="img-fluid" src="/images/ipad.png" alt="" />
+      </div>
+    </section>
+    <!-- Projects-->
+    <section class="projects-section bg-light" id="projects">
+      <div class="container">
+        <!-- Featured Project Row-->
+        <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="/images/ecommerce.png" alt="" /></div>
+          <div class="col-xl-4 col-lg-5">
+            <div class="featured-text text-center text-lg-left">
+              <h4>Vintage E-boutique Software</h4>
+              <p class="text-black-50 mb-0">The software is intended to be implemented on an e-commerce store that sells limited editions and vintage products and offer special services to registered users.</p>
+              <p>•	Customization function that enable users to personalize their products</p>
+              <p>•	Fast delivery services:</p>
+              <p>   1-2 days shipping US and Canada</p>
+              <p>   3 days shipping for the rest of the world</p>
+              <p>•	Shipping insurance policy<p>
+              <p>•	Tracking services<p>
+            </div>
+          </div>
+        </div>
+        <!-- Project One Row-->
+        <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+          <div class="col-lg-6"><img class="img-fluid" src="/images/trakpak.png" alt="" /></div>
+          <div class="col-lg-6">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-left">
+                  <h4 class="text-white">TrakPak Project</h4>
+                  <p class="mb-0 text-white-50">TrakPak is an independent corporation that sells a tangible product and provides several services for B2B and B2C. There are two sides of the business; the first side is to provide the luggage information service to consumers, and the second is to gather data to fuel marketing and any other application that it may be suitable for.</p>
+
+                  <hr class="d-none d-lg-block mb-0 ml-0" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Project Two Row-->
+        <div class="row justify-content-center no-gutters">
+          <div class="col-lg-6"><img class="img-fluid" src="/images/karting.jpg" alt="" /></div>
+          <div class="col-lg-6 order-lg-first">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-right">
+                  <h4 class="text-white">Karting Center and Enteritainement</h4>
+                  <p class="mb-0 text-white-50">I have worked on a Karting project accompagnied with a center of entertainement, restaurant, and cafes. I have prepared the business plan needed for launching the project in Tunisia. The competitive advantage was that all the vehicles were fully electric and super powerful.</p>
+                  <hr class="d-none d-lg-block mb-0 mr-0" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Services-->
+            </div>
+    <section class="projects-section bg-light" id="services">
+      <div class="container">
+        <!-- Featured Project Row-->
+        <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="/images/programming.png" alt="" /></div>
+            <div class="col-xl-4 col-lg-5">
+              <div class="featured-text text-center text-lg-left">
+                <h4>Services Offered</h4>
+                <p class="text-black-50 mb-0">• Oracle SQL Developer</p>
+                <p class="text-black-50 mb-0">• C# and Java Programming</p>
+                <p class="text-black-50 mb-0">• Java Programming</p>
+                <p class="text-black-50 mb-0">• Javascript Programming</p>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact-->
+    <section class="contact-section bg-black" id="contactme">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card py-4 h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">Address</h4>
+                <hr class="my-4" />
+                <div class="small text-black-50">33 Isabella Street, Toronto ON</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card py-4 h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-envelope text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">Email</h4>
+                <hr class="my-4" />
+                <div class="small text-black-50"><a href="#!">igoddi@my.centennialcollege.ca</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card py-4 h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">Phone</h4>
+                <hr class="my-4" />
+                <div class="small text-black-50">+1 (437) 984-2129</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="social d-flex justify-content-center">
+          <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+          <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+          <a class="mx-2" href="#!"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </section>
+    <!-- Footer-->
+    <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © Ibrahim Goddi 2020</div></footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/javascripts/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="javascripts/scripts.js"></script>
   </body>
 </html>

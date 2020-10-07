@@ -6,20 +6,32 @@
 
 var app = require('../app');
 var debug = require('debug')('portfolioapp:server');
-var http = require('http');
+
+const https=require("https"),
+    fs= require ("fs"),
+    helmet = require("helmet");
+
+const options ={
+  key: fs.readFileSync("./tls/localhost+2-key.pem"),
+  cert: fs.readFileSync("./tls/localhost+2.pem"),
+  dhparam: fs.readFileSync("./tls/dh-strong.pem")
+};
+
+// Add Helmet as a middleware to ensure HSTS (Http Strict Transport Security) : This is force the browser to use https
+app.use(helmet());
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3443');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = https.createServer(options,app);
 
 /**
  * Listen on provided port, on all network interfaces.
