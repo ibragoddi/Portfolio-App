@@ -67,6 +67,66 @@ Edit the "www" file under "bin" folder with the following:
 Here, the helmet package is used to ensure HSTS (Http Strict Transport Security) which hint the 
 browser to use exclusively https protocol.
 
+### Comment header in contact.ejs
+`<!--
+ File name: contact.ejs
+ Student’s Name: Ibrahim Goddi
+ StudentID: 301122092
+ Date: Oct 7, 2020
+  -->`
+### Comment header in error.ejs  
+`<!--
+ File name: error.ejs
+ Student’s Name: Ibrahim Goddi
+ StudentID: 301122092
+ Date: Oct 3, 2020
+  -->`
+### Comment header in index.ejs
+`<!--
+ File name: index.ejs
+ Student’s Name: Ibrahim Goddi
+ StudentID: 301122092
+ Date: Oct 3, 2020
+  -->`
+### Comment header in scripts.js
+`/*!
+ File name: scripts.ejs
+ Student’s Name: Ibrahim Goddi
+ StudentID: 301122092
+ Date: Oct 7, 2020
+ */`
+### Comment header in style.css
+`/*!
+ File name: style.css
+ Student’s Name: Ibrahim Goddi
+ StudentID: 301122092
+ Date: Oct 3, 2020
+ */` 
+### Comment header in theme.css
+`/*!
+ File name: theme.css
+ Student’s Name: Ibrahim Goddi
+ StudentID: 301122092
+ Date: Oct 7, 2020
+ */`
+### Partials for Contact file
+I created a new file called "contact.ejs".
+I added the template (from internet) in "contact.ejs" file. 
+I Imported the contact router in "app.js" file using:
+`var contactRouter = require('./routes/contact');`
+I added the contact Route to the express app in "app.js" file using:
+`app.use('/contact', contactRouter);`
+I created "contact.js" file and added the following:
+`router.get('/', function(req, res, next) {
+     res.render('contact', { title: 'Ibrahim Goddi\'s Contact Page'});
+ });`
 
-
+### Partials for footer file
+I created a new file called " footer.ejs" under partials and added the following:
+`<footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © Ibrahim Goddi 2020</div></footer>`
+I have also modified the file "index.ejs" with:
+`<%- include('partials/footer') %>`
+  
+### Partials for header file
+I have created the "header.ejs" file.
 

@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 // Import the contact router (for contact template page)
-var contactRouter = require('./routes/contact')
+var contactRouter = require('./routes/contact');
 
 var app = express();
 
