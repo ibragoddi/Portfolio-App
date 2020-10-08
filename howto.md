@@ -130,4 +130,43 @@ I have also modified the file "index.ejs" with:
   
 ### Partials for header file
 I have created the "header.ejs" file.
+I have added the following code in it:
+`<% menu.forEach(function(item) { %>
+                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<%=item.link%>"><%= item.title %></a></li>
+                 <% }); %>`
+
+### Adding image to "about me page"
+Download the image "me.png" from internet and add the following code:
+`<img class="img-fluid" src="/images/me.png" alt="Ibrahim Goddi" style="width: 350px" />`
+
+### Modifying the contact page with the following:
+`target="_blank">Click Here!</a></div>`
+
+### Adding to the "contact.ejs" file the following:
+`<%- include('partials/footer') %>`
+Adding the following code for the three sections (Forename, Surname, Email):
+`md-form input-group mb-3` 
+Adding the following attribute to the same sections:
+`placeholder="section-name"`
+Adding the following code in the same sections:
+`class="input-group-prepend"><span class="input-group-text" id="basic-addon1">section-name: </span>`
+
+### Modify the "index.js" file with the following:
+`var indexMenu = [
+     {title:"About Me",link:"#aboutme"},
+     {title: "Projects",link: "#projects"},
+     {title: "Services",link: "#services"},
+     {title: "Contact Me",link: "#contactme"}
+   ];
+   res.render('index', {
+     title: 'Ibrahim Goddi\'s Personal Portfolio',
+     menu: indexMenu
+   });`
+
+### Modify the style sheet "style.css" with the following:
+`.special-background {
+   /* This class makes the background transparent.*/
+   background-color: rgba(245, 245, 245, 1);
+   opacity: .4;
+ }`
 

@@ -3,7 +3,13 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('contact', { title: 'Ibrahim Goddi\'s Contact Page'});
+    var contactMenu = [
+        {title:"Home",link:"#page-top"}
+    ];
+    res.render('contact',
+        { title: 'Ibrahim Goddi\'s Contact Page',
+        menu: contactMenu});
 });
 
 module.exports = router;
+

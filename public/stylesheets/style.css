@@ -5,11 +5,8 @@ StudentID: 301122092
 Date: Oct 3, 2020
 */
 
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
+.special-background {
+  /* This class makes the background transparent.*/
+  background-color: rgba(245, 245, 245, 1);
+  opacity: .4;
 }
