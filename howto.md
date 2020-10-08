@@ -111,15 +111,16 @@ browser to use exclusively https protocol.
  */`
 ### Partials for Contact file
 I created a new file called "contact.ejs".
-I added the template (from internet) in "contact.ejs" file. 
-I Imported the contact router in "app.js" file using:
-`var contactRouter = require('./routes/contact');`
-I added the contact Route to the express app in "app.js" file using:
-`app.use('/contact', contactRouter);`
-I created "contact.js" file and added the following:
+I wrote html code for contact form.
+I crated a contact Route (contact.js) for the EJS template:
 `router.get('/', function(req, res, next) {
      res.render('contact', { title: 'Ibrahim Goddi\'s Contact Page'});
  });`
+I imported the contact router in "app.js" file using:
+`var contactRouter = require('./routes/contact');`
+I added the contact Route to the express app in "app.js" file using:
+`app.use('/contact', contactRouter);`
+
 
 ### Partials for footer file
 I created a new file called " footer.ejs" under partials and added the following:
