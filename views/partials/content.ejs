@@ -1,0 +1,37 @@
+<!-- Projects-->
+<section class="projects-section bg-light" id="projects">
+    <div class="container">
+        <% projects.forEach(function(project) { %>
+            <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+                <div class="col-lg-6"><img style="width: 500px" class="img-fluid" src="<%=project.image%>" alt="" /></div>
+                <div class="col-lg-6">
+                    <div class="h-100 project">
+                        <h4><%=project.name%></h4>
+                        <%-project.description%>
+                    </div>
+                </div>
+            </div>
+            <br/>
+        <% }); %>
+    </div>
+</section>
+
+<!-- Services-->
+</div>
+<section class="projects-section bg-light" id="services">
+    <div class="container">
+        <!-- Featured Project Row-->
+        <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+            <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="/images/programming.png" alt="" /></div>
+            <div class="col-xl-4 col-lg-5">
+                <div class="featured-text text-center text-lg-left">
+                    <h4>Services Offered</h4>
+                    <p class="text-black-50 mb-0">• Oracle SQL Developer</p>
+                    <p class="text-black-50 mb-0">• C# and Java Programming</p>
+                    <p class="text-black-50 mb-0">• Java Programming</p>
+                    <p class="text-black-50 mb-0">• Javascript Programming</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
