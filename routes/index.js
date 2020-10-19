@@ -7,7 +7,8 @@ router.get('/', function(req, res, next) {
     {title: "About Me",link:"#aboutme"},
     {title: "Projects",link: "#projects"},
     {title: "Services",link: "#services"},
-    {title: "Contact Me",link: "#contactme"}
+    {title: "Contact Me",link: "#contactme"},
+    {title: "Login", link: "#login"}
   ];
   var projectsVar = [
     {name: "Ecommerce", description: "<p class=\"text-black-50 mb-0\">The software is intended to be \n" +
