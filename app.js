@@ -8,6 +8,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 // Load the API for logging
 var logger = require('morgan');
+var compress = require('compression');
+
+// Configure Mongoose
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+const configureMongoose = require('./config/mongoose');
+
+const db = configureMongoose();
+
+// Configure Passport
+const passport = require('./config/passport');
+var passport = passport();
 
 // Load the REST service for the index EJS template
 var indexRouter = require('./routes/index');
@@ -23,7 +34,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Configure express with logging, json, urlencoded, cookie parser, and static path for resources
-app.use(logger('dev'));
+if (process.env.NODE_ENV === 'development') {
+  app.use(logger('dev'));
+} else if (process.env.NODE_ENV === 'production') {
+  app.use(compress());
+}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
