@@ -169,4 +169,327 @@ Adding the following code in the same sections:
    background-color: rgba(245, 245, 245, 1);
    opacity: .4;
  }`
+ 
+## Assignment 2
+
+### Install Mongoose
+`npm install mongoose --save `
+
+### Configue Mongoose
+`process.env.NODE_ENV = process.env.NODE_ENV || 'development';`
+
+`const configureMongoose = require('./config/mongoose');`
+
+`const db = configureMongoose();`
+
+### Connecting to MongoDB and storing application variables
+#### Add the following in Mongoose.js file
+`const config = require('./config');`
+
+ `const mongoose = require('mongoose');`
+ 
+ `module.exports = function() {`
+     `const db = mongoose.connect(config.db);`
+     `require('../models/user.model');`
+     `return db;`
+` };`
+
+
+#### Add the following in development.ejs
+`module.exports = {`
+
+     `db: 'mongodb://localhost/portfolioDB',`
+     `sessionSecret: 'developmentSessionSecret'`
+ `};`
+
+#### Add config.js
+
+
+#### Create the user schema and model
+`const mongoose = require('mongoose');`
+
+` const Schema = mongoose.Schema;`
+ `const UserSchema = new Schema({`
+     `firstName: String,
+     lastName: String,
+     email: String,
+     username: String,
+     password: String
+ });`
+ `mongoose.model('User', UserSchema);`
+
+
+#### Create new users using save
+`
+const User = require('mongoose').model('User');`
+`exports.create = function(req, res, next) {`
+`    const user = new User(req.body);`
+
+    user.save((err) => {
+        if (err) {
+            return next(err);
+        } else {
+            res.status(200).json(user);
+        }
+    });
+`};`
+
+#### Adding the following code in users.js
+`var express = require('express');`
+ `var router = express.Router();`
+ 
+ `var users = require('../controllers/users.controller');`
+ 
+ `router.route('/')`
+       `.post(users.create)`
+       `.get(users.list);`
+ 
+ `module.exports = router;`
+
+#### Find multiple user documents using find
+`exports.list = function(req, res, next) {
+     User.find({}, (err, users) => {
+         if (err) {
+             return next(err);
+         } else {
+             res.status(200).json(users);
+         }
+     });
+ };
+`
+
+
+### Install passport:
+`npm install passport --save `
+
+## Configuration of development.js and production.js
+### Add the following code in production.js:
+`module.exports = {
+     db: 'mongodb://localhost/portfolioDB',
+     sessionSecret: 'productionSessionSecret',
+     certFile: '/etc/letsencrypt/live/ibrahim-goddi.top/fullchain.pem',
+     keyFile: '/etc/letsencrypt/live/ibrahim-goddi.top/privkey.pem'
+ };`
+
+### Add the following code in development.js
+`module.exports = {
+     db: 'mongodb://localhost/portfolioDB',
+     sessionSecret: 'developmentSessionSecret',
+     certFile: './tls/localhost+2.pem',
+     keyFile: './tls/localhost+2-key.pem'
+ };`
+
+### To switch between "development config" and "production config"
+`const env = process.env.NODE_ENV || 'development';`
+`module.exports = require(`./env/${env}`);`
+
+### Install argon2:
+`npm install argon2 --save`
+
+## Modify create function to support password hash
+`const User = require('mongoose').model('User');`
+ `const argon2 = require('argon2');`
+ 
+ `exports.create = async function(req, res, next) {
+     const user = new User(req.body);`
+ 
+     try {
+         user.password = await argon2.hash(user.password, {
+             type: argon2.argon2id,
+             memoryCost: 2 ** 16,
+             hashLength: 64,
+             saltLength: 32,
+             parallelism: 2
+         });
+         user.save((err) => {
+             if (err) {
+                 return next(err);
+             } else {
+                 res.status(200).json(user);
+             }
+         });
+     } catch (err) {
+         return next(err);
+     }
+ 
+ };
+`
+## Strengthen the hash password
+`type: argon2.argon2id,
+             memoryCost: 2 ** 16,
+             hashLength: 64,
+             saltLength: 32,
+             parallelism: 2
+`
+## Add the following code in Mongoose.js
+`const config = require('./config');
+ const mongoose = require('mongoose');
+ module.exports = function() {
+     const db = mongoose.connect(config.db);
+     require('../models/user.model');
+     return db;
+ };`
+ 
+## Load the body parser API 
+### Add the following code in app.js
+`var bodyParser = require('body-parser');`
+`app.use(bodyParser);`
+
+`if (process.env.NODE_ENV === 'development') {
+   app.use(logger('dev'));
+ } else if (process.env.NODE_ENV === 'production') {
+   app.use(compress());
+ }`
+
+## Create "user.model.js" and add the following code
+`const mongoose = require('mongoose');
+ const Schema = mongoose.Schema;
+ const argon2 = require('argon2');`
+ 
+ `const UserSchema = new Schema({
+     firstName: String,
+     lastName: String,
+     email: {
+         type: String,
+         required: true,
+         unique: true
+     },
+     username: {
+         type: String,
+         required: true,
+         unique: true
+     },
+     password: {
+         type: String,
+         required: true,
+     }
+ });`
+ 
+ `UserSchema.methods.isValidPassword = async function(password) {`
+     `const user = this;
+     const compare = await argon2.verify(user.password, password);`
+ 
+     return compare;
+ `}`
+
+ `mongoose.model('User', UserSchema);`
+## Create "auth.controller.js" and add the following code
+`const passport = require('passport');
+ const localStrategy = require('passport-local').Strategy;
+ const UserModel = require('../models/user.model');
+ const JWTstrategy = require('passport-jwt').Strategy;
+ const ExtractJWT = require('passport-jwt').ExtractJwt;`
+  
+ `passport.use(
+     'signUp',
+     new localStrategy(
+         {
+             usernameField: 'username',
+             passwordField: 'password'
+         },`
+         `async (username, password, done) => {
+             try {
+                 const user = await UserModel.create({ username, password });`
+ 
+                 `return done(null, user);`
+             } catch (error) {
+                 done(error);
+             }
+         }
+     )
+ `);`
+
+ `passport.use(
+     'signIn',
+     new localStrategy(
+         {
+             usernameField: 'username',
+             passwordField: 'password'
+         },
+         async (username, password, done) => {
+             try {
+                 const user = await UserModel.findOne({ username });`
+ 
+                 if (!user) {
+                     return done(null, false, { message: 'User not found' });
+                 }
+ 
+                 const validate = await user.isValidPassword(password);
+ 
+                 if (!validate) {
+                     return done(null, false, { message: 'Wrong Password' });
+                 }
+ 
+                 return done(null, user, { message: 'Logged in Successfully' });
+             } catch (error) {
+                 return done(error);
+             }
+         }
+     )
+ `);`
+ 
+ `passport.use(
+     new JWTstrategy(
+         {
+             secretOrKey: 'TOP_SECRET',
+             jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+         },
+         async (token, done) => {
+             try {
+                 return done(null, token.user);
+             } catch (error) {
+                 done(error);
+             }
+         }
+     )
+ );`
+ 
+## Add the following code to users.js
+`router.route('/')
+       .post(users.create)
+       .get(users.list);
+ router.route('/:username')
+     .patch(users.changePassword);
+ router.route('/signUp')
+     .post([passport.authenticate('signUp', { session: false }),
+         async (req, res, next) => {
+             res.json({
+                 message: 'Signup successful',
+                 user: req.user
+             });
+         }]);
+`
+`router.post(
+     '/signIn',
+     async (req, res, next) => {
+         passport.authenticate(
+             'signIn',
+             async (err, user, info) => {
+                 try {
+                     if (err || !user) {
+                         const error = new Error('An error occurred.');`
+ 
+                         return next(error);
+                     }
+ 
+                     req.login(
+                         user,
+                         { session: false },
+                         async (error) => {
+                             if (error) return next(error);
+ 
+                             const body = { _id: user._id, email: user.email };
+                             const token = jwt.sign({ user: body }, 'TOP_SECRET');
+ 
+                             return res.json({ token });
+                         }
+                     );
+                 } catch (error) {
+                     return next(error);
+                 }
+             }
+         )(req, res, next);
+     }
+ `);`
+ 
 
