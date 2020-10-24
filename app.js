@@ -60,7 +60,7 @@ app.use('/contact', contactRouter);
 // Add the login Router to the express app
 app.use('/login', loginRouter);
 // Add a secure router to the express app (only logged users can access this router)
-app.use('/my-contacts', passport.authenticate('jwt', { session: false , failureRedirect: '/login'}), secureRouter);
+app.use('/my-contacts', passport.authenticate('jwt', { session: false , failureRedirect: '/login?redirectUrl=/my-contacts'}), secureRouter);
 // { successRedirect: '/',
 //                                    failureRedirect: '/login' }
 

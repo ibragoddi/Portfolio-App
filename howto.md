@@ -492,4 +492,140 @@ const User = require('mongoose').model('User');`
      }
  `);`
  
+## Add the business contact route in app.js to be secured
+`const secureRoute = require('./routes/business-contacts');`
+## Add the secure route to the express app 
+`app.use('/my-contacts', passport.authenticate('jwt', { session: false }), secureRoute);`
+
+## Add the following code in index.js
+`{title: "Business Contacts", link: "/my-contacts"}`
+
+## Create contacts-style.css and implement a stylesheet template
+
+## Create login.ejs and add the following:
+`<!doctype html>`
+ `<html>
+     <head>
+         <meta charset ="utf-8">
+         <title>Ibrahim Goddi's Personal Portfolio - Login</title>
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+     </head>
+     <body>
+         <div id="login">
+             <h3 class="text-center text-white pt-5">Login form</h3>
+             <div class="container">
+                 <div id="login-row" class="row justify-content-center align-items-center">
+                     <div id="login-column" class="col-md-6">
+                         <div id="login-box" class="col-md-12">
+                             <form id="login-form" class="form" action="/users/signIn" method="post">
+                                 <h3 class="text-center text-info">Login</h3>
+                                 <div class="form-group">
+                                     <label for="username" class="text-info">Username:</label><br>
+                                     <input type="text" name="username" id="username" class="form-control">
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="password" class="text-info">Password:</label><br>
+                                     <input type="text" name="password" id="password" class="form-control">
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                     <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                                 </div>
+                                 <div id="register-link" class="text-right">
+                                     <a href="#" class="text-info">Register here</a>
+                                 </div>
+                             </form>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </body>`
+ `</html>`
+
+## Create login.js:
+`const express = require('express');`
+### Construct a new REST service (Router) with express API
+`const router = express.Router();`
+`router.get('/',(req, res, next) => {
+    res.render('login');
+});`
+`module.exports = router;`
+
+## Modify auth.controller.js by the following code:
+`passport.use(
+     'signIn',
+     new localStrategy(
+         {
+             usernameField: 'username',
+             passwordField: 'password'
+         },
+         async (username, password, done) => {
+             try {
+                 const user = await UserModel.findOne({ username: username });
+                 console.dir(username + "  " + password);
+                 console.dir(user);
+                 if (!user) {
+                     return done(null, false, { message: 'User not found' });
+                 }
+                 const validate = await user.isValidPassword(password);`
+ 
+                 if (!validate) {
+                     return done(null, false, { message: 'Wrong Password' });
+                 }
+                 return done(null, user, { message: 'Logged in Successfully' });
+             } catch (error) {
+                 console.dir(error.message);
+                 return done(error);
+             }
+         }
+     )
+ `);`
+
+## In app.js:
+### Load the login router
+`const loginRouter = require('./routes/login');`
+
+### Add the login Router to the express app
+`app.use('/login', loginRouter);`
+
+## Modify users.js by the following code:
+`router.post(
+     '/signIn',
+     async (req, res, next) => {
+         passport.authenticate(
+             'signIn',
+             async (err, user, info) => {
+                 try {
+                     if (err || !user) {
+                         const error = new Error('An error occurred.');`
+ 
+                         return next(error);
+                     }
+ 
+                     req.login(
+                         user,
+                         { session: false },
+                         async (error) => {
+                             if (error) return next(error);
+ 
+                             const body = { _id: user._id, email: user.email };
+                             const token = jwt.sign({ user: body }, 'TOP_SECRET');
+ 
+                             return res.json({ token });
+                         }
+                     );
+                 } catch (error) {
+                     return next(error);
+                 }
+             }
+         )(req, res, next);
+     }
+ `);`
+
+
+
+
 

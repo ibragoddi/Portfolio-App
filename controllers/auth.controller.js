@@ -33,8 +33,6 @@ passport.use(
         async (username, password, done) => {
             try {
                 const user = await UserModel.findOne({ username: username });
-                console.dir(username + "  " + password);
-                console.dir(user);
                 if (!user) {
                     return done(null, false, { message: 'User not found' });
                 }
@@ -45,7 +43,6 @@ passport.use(
                 }
                 return done(null, user, { message: 'Logged in Successfully' });
             } catch (error) {
-                console.dir(error.message);
                 return done(error);
             }
         }

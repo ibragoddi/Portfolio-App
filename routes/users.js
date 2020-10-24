@@ -30,10 +30,8 @@ router.post(
                 try {
                     if (err || !user) {
                         const error = new Error('An error occurred.');
-
                         return next(error);
                     }
-
                     req.login(
                         user,
                         { session: false },
